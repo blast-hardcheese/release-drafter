@@ -53,6 +53,11 @@ inputs:
       A boolean indicating whether the autolabeler mode is disabled.
     required: false
     default: ''
+  include-paths:
+    description: |
+      A list of paths for which associated PRs should be considered
+    required: false
+    default: []
 outputs:
   id:
     description: The ID of therelease that was created or updated.

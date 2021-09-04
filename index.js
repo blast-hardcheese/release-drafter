@@ -131,6 +131,7 @@ module.exports = (app, { getRouter }) => {
       tag,
       name,
       disableReleaser,
+      includePaths,
     } = getInput()
 
     const config = await getConfig({
@@ -163,6 +164,7 @@ module.exports = (app, { getRouter }) => {
       ref,
       lastRelease,
       config,
+      includePaths,
     })
 
     const sortedMergedPullRequests = sortPullRequests(
@@ -220,6 +222,7 @@ function getInput({ config } = {}) {
         core.getInput('disable-releaser').toLowerCase() === 'true',
       disableAutolabeler:
         core.getInput('disable-autolabeler').toLowerCase() === 'true',
+      includePaths: core.getInput('include-paths') || [],
     }
   }
 
