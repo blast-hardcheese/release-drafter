@@ -46,7 +46,7 @@ repos.forEach((repo) => {
       Authorization: `bearer ${GITHUB_TOKEN}`,
     },
     body: JSON.stringify({
-      query: findCommitsWithAssociatedPullRequestsQuery,
+      query: findCommitsWithAssociatedPullRequestsQuery({ paths: [] }),
       variables: {
         owner: repo.owner,
         name: REPO_NAME,
