@@ -58,6 +58,11 @@ inputs:
       A list of paths for which associated PRs should be considered
     required: false
     default: []
+  tag-prefix:
+    description: |
+      A prefix for selecting which releases get considered by this invocation of release-drafter
+    required: false
+    default: ''
 outputs:
   id:
     description: The ID of therelease that was created or updated.
