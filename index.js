@@ -167,44 +167,46 @@ module.exports = (app, { getRouter }) => {
       paths: includePaths,
     })
 
-    const sortedMergedPullRequests = sortPullRequests(
-      mergedPullRequests,
-      config['sort-by'],
-      config['sort-direction']
-    )
+    if (commits.length) {
+      const sortedMergedPullRequests = sortPullRequests(
+        mergedPullRequests,
+        config['sort-by'],
+        config['sort-direction']
+      )
 
-    const releaseInfo = generateReleaseInfo({
-      commits,
-      config,
-      lastRelease,
-      mergedPullRequests: sortedMergedPullRequests,
-      version,
-      tag,
-      name,
-      isPreRelease,
-      shouldDraft,
-    })
-
-    let createOrUpdateReleaseResponse
-    if (!draftRelease) {
-      log({ context, message: 'Creating new release' })
-      createOrUpdateReleaseResponse = await createRelease({
-        context,
-        releaseInfo,
+      const releaseInfo = generateReleaseInfo({
+        commits,
         config,
+        lastRelease,
+        mergedPullRequests: sortedMergedPullRequests,
+        version,
+        tag,
+        name,
+        isPreRelease,
+        shouldDraft,
       })
-    } else {
-      log({ context, message: 'Updating existing release' })
-      createOrUpdateReleaseResponse = await updateRelease({
-        context,
-        draftRelease,
-        releaseInfo,
-        config,
-      })
-    }
 
-    if (runnerIsActions()) {
-      setActionOutput(createOrUpdateReleaseResponse, releaseInfo)
+      let createOrUpdateReleaseResponse
+      if (!draftRelease) {
+        log({ context, message: 'Creating new release' })
+        createOrUpdateReleaseResponse = await createRelease({
+          context,
+          releaseInfo,
+          config,
+        })
+      } else {
+        log({ context, message: 'Updating existing release' })
+        createOrUpdateReleaseResponse = await updateRelease({
+          context,
+          draftRelease,
+          releaseInfo,
+          config,
+        })
+      }
+
+      if (runnerIsActions()) {
+        setActionOutput(createOrUpdateReleaseResponse, releaseInfo)
+      }
     }
   })
 }
