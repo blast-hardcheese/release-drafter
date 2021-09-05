@@ -222,7 +222,9 @@ function getInput({ config } = {}) {
         core.getInput('disable-releaser').toLowerCase() === 'true',
       disableAutolabeler:
         core.getInput('disable-autolabeler').toLowerCase() === 'true',
-      includePaths: core.getInput('include-paths') || [],
+      includePaths: (core.getInput('include-paths') || '')
+        .split(',')
+        .filter((x) => Boolean(x)),
     }
   }
 

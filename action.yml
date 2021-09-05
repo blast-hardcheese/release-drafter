@@ -57,7 +57,7 @@ inputs:
     description: |
       A list of paths for which associated PRs should be considered
     required: false
-    default: []
+    default: ''
   tag-prefix:
     description: |
       A prefix for selecting which releases get considered by this invocation of release-drafter
