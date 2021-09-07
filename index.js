@@ -132,6 +132,7 @@ module.exports = (app, { getRouter }) => {
       name,
       disableReleaser,
       includePaths,
+      tagPrefix,
     } = getInput()
 
     const config = await getConfig({
@@ -151,10 +152,13 @@ module.exports = (app, { getRouter }) => {
       return
     }
 
+    const paths = (includePaths || '').split(',').filter((x) => Boolean(x))
     const { draftRelease, lastRelease } = await findReleases({
       ref,
       context,
       config,
+      paths,
+      tagPrefix,
     })
     const {
       commits,
@@ -164,7 +168,7 @@ module.exports = (app, { getRouter }) => {
       ref,
       lastRelease,
       config,
-      paths: includePaths,
+      paths,
     })
 
     if (commits.length) {
@@ -227,6 +231,7 @@ function getInput({ config } = {}) {
       includePaths: (core.getInput('include-paths') || '')
         .split(',')
         .filter((x) => Boolean(x)),
+      tagPrefix: core.getInput('tag-prefix') || '',
     }
   }
 
