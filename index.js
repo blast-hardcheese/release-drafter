@@ -152,7 +152,7 @@ module.exports = (app, { getRouter }) => {
       return
     }
 
-    const paths = (includePaths || '').split(',').filter((x) => Boolean(x))
+    const paths = includePaths
     const { draftRelease, lastRelease } = await findReleases({
       ref,
       context,
