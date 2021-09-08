@@ -140,6 +140,11 @@ module.exports = (app, { getRouter }) => {
       configName,
     })
 
+    log({
+      context,
+      message: `EVENT: ${configName} yields ${JSON.stringify(config)}`,
+    })
+
     const { isPreRelease } = getInput({ config })
 
     if (config === null || disableReleaser) return
