@@ -183,6 +183,10 @@ module.exports = (app, { getRouter }) => {
         config['sort-direction']
       )
 
+      log({
+        context,
+        message: `version: ${version}, name: ${name}, tag: ${tag}`,
+      })
       const releaseInfo = generateReleaseInfo({
         context,
         commits,
