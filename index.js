@@ -228,6 +228,7 @@ module.exports = (app, { getRouter }) => {
 function getInput({ config } = {}) {
   // Returns all the inputs that doesn't need a merge with the config file
   if (!config) {
+    console.log(`Bunch of garbage: ${core.getInput('name')}`)
     return {
       shouldDraft: core.getInput('publish').toLowerCase() !== 'true',
       configName: core.getInput('config-name'),
