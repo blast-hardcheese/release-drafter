@@ -138,6 +138,9 @@ module.exports = (app, { getRouter }) => {
       configName,
     })
 
+    const includePaths = config['include-paths']
+    const tagPrefix = config['tag-prefix']
+
     const { isPreRelease } = getInput({ config })
 
     if (config === null || disableReleaser) return
