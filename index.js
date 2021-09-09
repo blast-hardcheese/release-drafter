@@ -166,6 +166,7 @@ module.exports = (app, { getRouter }) => {
       ref,
       lastRelease,
       config,
+      includePaths,
     })
 
     const sortedMergedPullRequests = sortPullRequests(
