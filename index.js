@@ -157,6 +157,7 @@ module.exports = (app, { getRouter }) => {
       ref,
       context,
       config,
+      tagPrefix,
     })
     const {
       commits,
@@ -168,6 +169,10 @@ module.exports = (app, { getRouter }) => {
       config,
       includePaths,
     })
+
+    if (!commits.length) {
+      return
+    }
 
     const sortedMergedPullRequests = sortPullRequests(
       mergedPullRequests,
