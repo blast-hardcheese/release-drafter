@@ -13,6 +13,7 @@ const release3Payload = require('./fixtures/release-3.json')
 const pushNonMasterPayload = require('./fixtures/push-non-master-branch.json')
 const graphqlCommitsNoPRsPayload = require('./fixtures/graphql-commits-no-prs.json')
 const graphqlCommitsMergeCommit = require('./fixtures/__generated__/graphql-commits-merge-commit.json')
+const graphqlPathsMergeCommit = require('./fixtures/__generated__/graphql-paths-merge-commit.json')
 const graphqlCommitsEmpty = require('./fixtures/graphql-commits-empty.json')
 const releaseDrafterFixture = require('./fixtures/release-draft.json')
 const graphqlCommitsOverlappingLabel = require('./fixtures/__generated__/graphql-commits-overlapping-label.json')
@@ -2115,6 +2116,59 @@ describe('release-drafter', () => {
       })
 
       expect.assertions(1)
+    })
+  })
+
+  describe('with include-paths config', () => {
+    it('FIXME: returns the modified paths', async () => {
+      // FIXME: No idea how to actually write this test.
+      getConfigMock('config-with-include-paths.yml')
+
+      nock('https://api.github.com')
+        .post('/graphql', (body) =>
+          body.query.includes('query findCommitsWithAssociatedPullRequests')
+        )
+        .reply(200, graphqlCommitsMergeCommit)
+
+      nock('https://api.github.com')
+        .post('/graphql', (body) =>
+          body.query.includes('query findCommitsWithPathChangesQuery')
+        )
+        .reply(200, graphqlPathsMergeCommit)
+
+      nock('https://api.github.com')
+        .get(
+          '/repos/toolmantim/release-drafter-test-project/releases?per_page=100'
+        )
+        .reply(200, [])
+
+      //      nock('https://api.github.com')
+      //        .post(
+      //          '/repos/toolmantim/release-drafter-test-project/releases',
+      //          (body) => {
+      //            expect(body).toMatchInlineSnapshot(`
+      //              Object {
+      //                "body": "dummy",
+      //                "draft": true,
+      //                "name": "",
+      //                "prerelease": false,
+      //                "tag_name": "",
+      //                "target_commitish": "refs/heads/master",
+      //              }
+      //            `)
+      //            return true
+      //          }
+      //        )
+      //        .reply(200, releasePayload)
+
+      const payload = pushPayload
+
+      await probot.receive({
+        name: 'push',
+        payload,
+      })
+
+      //      expect.assertions(1)
     })
   })
 
