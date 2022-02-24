@@ -1,0 +1,22 @@
+{
+  "data": {
+    "repository": {
+      "object": {
+        "history": {
+          "pageInfo": {
+            "hasNextPage": false,
+            "endCursor": "ed0a2bec8c895bb908638795c9da64763be75120 1"
+          },
+          "nodes": [
+            {
+              "id": "MDY6Q29tbWl0MTgzNzY2OTUzOjNhYmJhNTkxOGZmN2QxMmZhYjMyMjA1N2ZiZGMyM2I1MzVlNzZkMDE="
+            },
+            {
+              "id": "MDY6Q29tbWl0MTgzNzY2OTUzOmI5YWI2MGVlNGI4ZjNmYTg0Mjg2NDQ0NjViZGI1YTg4ZDcyZTY1M2E="
+            }
+          ]
+        }
+      }
+    }
+  }
+}

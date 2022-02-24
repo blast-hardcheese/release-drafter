@@ -94,7 +94,7 @@ for (const repo of repos) {
     'paths',
     repo,
     JSON.stringify({
-      query: findCommitsWithPathChangesQuery({ includePaths: ['README.md'] }),
+      query: findCommitsWithPathChangesQuery,
       variables: {
         owner: repo.owner,
         name: REPO_NAME,
@@ -103,6 +103,7 @@ for (const repo of repos) {
         withPullRequestURL: true,
         withBaseRefName: true,
         withHeadRefName: true,
+        path: 'README.md',
       },
     })
   )
