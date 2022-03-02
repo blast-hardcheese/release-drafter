@@ -2142,24 +2142,24 @@ describe('release-drafter', () => {
         )
         .reply(200, [])
 
-      //      nock('https://api.github.com')
-      //        .post(
-      //          '/repos/toolmantim/release-drafter-test-project/releases',
-      //          (body) => {
-      //            expect(body).toMatchInlineSnapshot(`
-      //              Object {
-      //                "body": "dummy",
-      //                "draft": true,
-      //                "name": "",
-      //                "prerelease": false,
-      //                "tag_name": "",
-      //                "target_commitish": "refs/heads/master",
-      //              }
-      //            `)
-      //            return true
-      //          }
-      //        )
-      //        .reply(200, releasePayload)
+      nock('https://api.github.com')
+        .post(
+          '/repos/toolmantim/release-drafter-test-project/releases',
+          (body) => {
+            expect(body).toMatchInlineSnapshot(`
+              Object {
+                "body": "dummy",
+                "draft": true,
+                "name": "",
+                "prerelease": false,
+                "tag_name": "",
+                "target_commitish": "refs/heads/master",
+              }
+            `)
+            return true
+          }
+        )
+        .reply(200, releasePayload)
 
       const payload = pushPayload
 
@@ -2168,7 +2168,7 @@ describe('release-drafter', () => {
         payload,
       })
 
-      //      expect.assertions(1)
+      expect.assertions(1)
     })
   })
 
